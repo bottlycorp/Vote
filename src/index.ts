@@ -14,10 +14,10 @@ const colors = new BColors({
 });
 
 fastify.post("/dblwebhook", webhook.listener((vote) => {
-  colors.log(`User ${vote.user} voted for the bot!`);
+  colors.info(`User ${vote.user} voted for the bot!`);
 }));
 
 fastify.listen({ port: 3000, host: "0.0.0.0" }, err => {
   if (err) throw err;
-  colors.info("Server listening at http://0.0.0.0:3000");
+  colors.success("Server listening at http://0.0.0.0:3000");
 });
