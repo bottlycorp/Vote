@@ -17,6 +17,11 @@ fastify.post("/dblwebhook", webhook.listener((vote) => {
   colors.info(`User ${vote.user} voted for the bot!`);
 }));
 
+fastify.post("/test", (req, res) => {
+  colors.success("Test");
+  res.send("Test");
+});
+
 fastify.listen({ port: 3000, host: "0.0.0.0" }, err => {
   if (err) throw err;
   colors.success("Server listening at http://0.0.0.0:3000");
