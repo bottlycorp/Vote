@@ -1,6 +1,6 @@
 import { BColors } from "bettercolors";
 import { getStringEnv } from "./utils/env-variables";
-import Topgg from "@top-gg/sdk";
+import { Webhook } from "@top-gg/sdk";
 import express from "express";
 
 const app = express();
@@ -13,12 +13,12 @@ const colors = new BColors({
   }
 });
 
-const webhook = new Topgg.Webhook(getStringEnv("TOPGG_TOKEN"));
+const webhook = new Webhook(getStringEnv("TOPGG_TOKEN"));
 
 app.post(
   "/dblwebhook",
   webhook.listener((vote) => {
-    console.log(vote.user);
+    colors.info(`User ${vote.user} voted for the bot!`);
   })
 );
 
