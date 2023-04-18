@@ -1,9 +1,10 @@
 import { BColors } from "bettercolors";
+import { getStringEnv } from "./utils/env-variables";
 
 const fastify = require("fastify")();
 const Topgg = require("@top-gg/sdk");
 
-const webhook = new Topgg.Webhook("topggauth123");
+const webhook = new Topgg.Webhook(getStringEnv("TOPGG_TOKEN"));
 
 const colors = new BColors({
   date: {
@@ -15,6 +16,7 @@ const colors = new BColors({
 
 fastify.post("/dblwebhook", webhook.listener((vote) => {
   colors.info(`User ${vote.user} voted for the bot!`);
+  return "Thanks for the vote!";
 }));
 
 fastify.post("/test", (req, res) => {
